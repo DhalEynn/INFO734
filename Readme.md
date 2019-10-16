@@ -1,4 +1,4 @@
-# INFO 734 : Fullstack development @ Polytch Annecy
+# INFO 734 : Fullstack development @ Polytech Annecy
 
 ## Project with NodeJS, IONIC 4, MongoDB.
 
