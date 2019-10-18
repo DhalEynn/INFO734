@@ -35,7 +35,7 @@ export class StaticMenuPage implements OnInit {
       this.items.push({
         title: this.pizza[i][0],
         note: 'Price : ' + this.pizza[i][1],
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+        icon: 'pizza' //this.icons[Math.floor(Math.random() * this.icons.length)]
       });
     }
   }
