@@ -4,7 +4,7 @@
 
 ## Pizzeria :
 
-### Static part with the card
+### Static part with the menu card
 ### Dynamic part with the daily menu
 
 ## For bonus :
