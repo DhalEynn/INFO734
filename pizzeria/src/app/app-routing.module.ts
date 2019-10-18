@@ -14,7 +14,12 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+  },
+  {
+    path: 'static-menu',
+    loadChildren: './static-menu/static-menu.module#StaticMenuPageModule'
   }
+
 ];
 
 @NgModule({

@@ -6,7 +6,8 @@
 
 ### Static part with the menu card
 * Write the list directly in the html code
-* Use a database to make the list (\*)
+* Put the ingredients in a collapsable part (\*)
+* Use a database to make the list (\*\*)
 
 ### Dynamic part with the daily menu
 
