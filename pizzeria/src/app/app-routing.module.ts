@@ -18,7 +18,9 @@ const routes: Routes = [
   {
     path: 'static-menu',
     loadChildren: './static-menu/static-menu.module#StaticMenuPageModule'
-  }
+  },  { path: 'review', loadChildren: './review/review.module#ReviewPageModule' },
+  { path: 'review', loadChildren: './review/review.module#ReviewPageModule' }
+
 
 ];
 

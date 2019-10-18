@@ -1,0 +1,4 @@
+https://www.tutorialspoint.com/mongodb/mongodb_create_database.htm
+https://www.joshmorony.com/an-introduction-to-nosql-for-html5-mobile-developers/
+https://www.joshmorony.com/building-a-review-app-with-ionic-2-mongodb-node/
+mongodb C:\Program Files\MongoDB\Server\4.2\bin shell 1er ex en partant du haut
