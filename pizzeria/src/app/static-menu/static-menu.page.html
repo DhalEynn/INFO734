@@ -11,11 +11,20 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
+    <p>Base tomate :</p>
+    <ion-item *ngFor="let pizza of baseTomate">
+      <ion-icon [name]="pizza.icon" slot="start"></ion-icon>
+      {{pizza.title}}
+      <div class="pizza-note" slot="end">
+        {{pizza.note}}
+      </div>
+    </ion-item>
+    <p>Base crème :</p>
+    <ion-item *ngFor="let pizza of baseCreme">
+      <ion-icon [name]="pizza.icon" slot="start"></ion-icon>
+      {{pizza.title}}
+      <div class="pizza-note" slot="end">
+        {{pizza.note}}
       </div>
     </ion-item>
   </ion-list>
