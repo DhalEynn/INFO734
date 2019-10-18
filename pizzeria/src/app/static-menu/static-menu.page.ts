@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StaticMenuPage implements OnInit {
   private selectedItem: any;
-  private pizza: [string, string][];
-  pizza = [
+  private pizza: [string, string] = [
     ['PINOZETANT', '9.00€'],
     ['MERQUET', '9.40€'],
     ['ROME', '9.40€'],
