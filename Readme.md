@@ -5,7 +5,7 @@
 ## Pizzeria :
 
 ### Static part with the menu card
-* Write the list directly in the html code
+* Write the list directly in the html code (done)
 * Put the ingredients in a collapsable part (\*)
 * Use a database to make the list (\*\*)
 
