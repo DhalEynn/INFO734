@@ -25,6 +25,7 @@ export class ListPage implements OnInit {
       this.items.push({
         title: 'Item ' + i,
         note: 'This is item #' + i,
+        id: "togList"+ 'Item' + i,
         icon: this.icons[Math.floor(Math.random() * this.icons.length)]
       });
     }
@@ -36,4 +37,11 @@ export class ListPage implements OnInit {
   // navigate(item) {
   //   this.router.navigate(['/list', JSON.stringify(item)]);
   // }
+  function_Check()
+  {
+    
+      documents.getElementById("togListItem2").checked = true;
+
+  }
+
 }

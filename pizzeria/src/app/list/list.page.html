@@ -10,18 +10,28 @@
 </ion-header>
 
 <ion-content>
+
   <ion-list>
     <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
+      <input id={{item.id}} type="checkbox">
+      <label for={{item.id}}>
+        <ion-icon [name]="item.icon" slot="start"></ion-icon>
       {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
+     </label>
+  <div class="list">
+    <ul>
+      <li>{{item.id}}</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+  </div>
     </ion-item>
   </ion-list>
+</ion-content>
   <!--
     <div *ngIf="selectedItem" padding>
       You navigated here from <b>{{selectedItem.title }}</b>
     </div>
   -->
-</ion-content>
+  
+
