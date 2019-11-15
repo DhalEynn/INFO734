@@ -9,8 +9,8 @@ export class StaticMenuPage implements OnInit {
   private selectedItem: any;
   private pizzaTomate: any;
   private pizzaCreme: any;
-  public baseTomate: Array<{ title: string; note: string; icon: string }> = [];
-  public baseCreme: Array<{ title: string; note: string; icon: string }> = [];
+  public baseTomate: Array<{ name: string; price: string; icon: string }> = [];
+  public baseCreme: Array<{ name: string; price: string; icon: string }> = [];
 
   constructor() {
     this.pizzaTomate = [
@@ -27,15 +27,15 @@ export class StaticMenuPage implements OnInit {
     ];
     for (let i = 0; i < this.pizzaTomate.length; i++) {
       this.baseTomate.push({
-        title: this.pizzaTomate[i][0],
-        note: 'Price : ' + this.pizzaTomate[i][1],
+        name: this.pizzaTomate[i][0],
+        price: this.pizzaTomate[i][1],
         icon: 'pizza'
       });
     }
     for (let i = 0; i < this.pizzaCreme.length; i++) {
       this.baseCreme.push({
-        title: this.pizzaCreme[i][0],
-        note: 'Price : ' + this.pizzaCreme[i][1],
+        name: this.pizzaCreme[i][0],
+        price: this.pizzaCreme[i][1],
         icon: 'pizza'
       });
     }

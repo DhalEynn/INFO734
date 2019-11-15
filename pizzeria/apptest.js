@@ -1,6 +1,29 @@
+const insertDocument = function(db, callback) {
+  // Get the documents collection
+  const collection = db.collection('documents');
+  if(arguments.length != 0){
+    for (i = 2; i < arguments.length; i++)
+    console.log(arguments[i]);
+  }
+  // Insert some documents
+  collection.insertMany([
+    {a : 1}, {a : 2}, {a : 3}
+  ], function(err, result) {
+    assert.equal(err, null);
+    assert.equal(3, result.result.n);
+    assert.equal(3, result.ops.length);
+    console.log("Inserted 3 documents into the collection");
+    callback(result);
+  });
+}
+
 const insertDocuments = function(db, callback) {
   // Get the documents collection
   const collection = db.collection('documents');
+  if(arguments.length != 0){
+    for (i = 2; i < arguments.length; i++)
+    console.log(arguments[i]);
+  }
   // Insert some documents
   collection.insertMany([
     {a : 1}, {a : 2}, {a : 3}
@@ -50,6 +73,17 @@ const removeDocument = function(db, callback) {
   });
 }
 
+const removeAllDocuments = function(db, callback) {
+  // Get the documents collection
+  const collection = db.collection('documents');
+  // Delete document where a is 3
+  collection.deleteMany({}, function(err, result) {
+    assert.equal(err, null);
+    console.log("Removed all documents");
+    callback(result);
+  });
+}
+
 const indexCollection = function(db, callback) {
   db.collection('documents').createIndex(
     { "a": 1 },
@@ -73,6 +107,9 @@ const dbName = 'pizzeria';
 // Create a new MongoClient
 const client = new MongoClient(url, { useNewUrlParser: true });
 
+const onePizzaTest = {name: 'PINOZETANT', price: '9.00€', ingredient: ['tomate', 'jambon', 'ananas', ' fromages râpés'], icon: 'pizza'};
+console.log(onePizzaTest);
+
 // Use connect method to connect to the Server
 client.connect(function(err) {
   assert.equal(null, err);
@@ -83,12 +120,14 @@ client.connect(function(err) {
   insertDocuments(db, function() {
     findDocuments(db, function() {
       updateDocument(db, function() {
-        removeDocument(db, function() {
-          indexCollection(db, function() {
-            client.close();
+        indexCollection(db, function() {
+          removeDocument(db, function() {
+            removeAllDocuments(db, function() {
+              client.close();
+            });
           });
         });
       });
     });
-  });
+  }, "test1", "test2");
 });
