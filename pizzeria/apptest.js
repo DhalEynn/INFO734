@@ -1,32 +1,42 @@
-const insertDocument = function(db, callback) {
-  // Get the documents collection
-  const collection = db.collection('documents');
-  if(arguments.length != 0){
-    for (i = 2; i < arguments.length; i++)
-    console.log(arguments[i]);
+const insertPizza = function(db, pizza, callback) {
+  // Get the pizzas collection
+  const collection = db.collection('pizzas');
+  if (pizza.hasOwnProperty("name") && pizza["name"] !== "" && pizza.hasOwnProperty("price") && pizza["price"] !== "" && pizza.hasOwnProperty("icon") && pizza["icon"] !== "" && pizza.hasOwnProperty("ingredients") && pizza["ingredients"] !== []) {
+    // Insert a pizza
+    collection.insertOne({name: pizza.name, price: pizza.price, ingredients: pizza.ingredients, icon: pizza.icon}, function(err, result) {
+      assert.equal(err, null);
+      assert.equal(1, result.ops.length);
+      callback(result);
+    });
   }
-  // Insert some documents
-  collection.insertMany([
-    {a : 1}, {a : 2}, {a : 3}
-  ], function(err, result) {
-    assert.equal(err, null);
-    assert.equal(3, result.result.n);
-    assert.equal(3, result.ops.length);
-    console.log("Inserted 3 documents into the collection");
-    callback(result);
+  else {
+    console.log("There was an error when inserting this pizza :");
+    console.log(pizza);
+    console.log("Please check your entry.");
+    callback("Error");
+  }
+}
+
+const insertOnePizza = function(db, pizza, callback) {
+  insertPizza(db, pizza, function(result) {
+    if (result == null) {
+      console.log("Inserted 1 pizza into the collection");
+    }
+    callback();
   });
 }
 
-const insertDocuments = function(db, callback) {
-  // Get the documents collection
-  const collection = db.collection('documents');
-  if(arguments.length != 0){
-    for (i = 2; i < arguments.length; i++)
-    console.log(arguments[i]);
+const insertManyPizzas = function(db, pizzaArray, callback) {
+  // Get the pizzas collection
+  const collection = db.collection('pizzas');
+  console.log(arguments);
+  // Insert some pizzas
+  var arrayPizz = [];
+  for (i = 0; i < pizza.length; i++){
+
   }
-  // Insert some documents
   collection.insertMany([
-    {a : 1}, {a : 2}, {a : 3}
+
   ], function(err, result) {
     assert.equal(err, null);
     assert.equal(3, result.result.n);
@@ -73,13 +83,13 @@ const removeDocument = function(db, callback) {
   });
 }
 
-const removeAllDocuments = function(db, callback) {
+const removeAllPizzas = function(db, callback) {
   // Get the documents collection
-  const collection = db.collection('documents');
+  const collection = db.collection('pizzas');
   // Delete document where a is 3
   collection.deleteMany({}, function(err, result) {
     assert.equal(err, null);
-    console.log("Removed all documents");
+    console.log("Removed all pizzas");
     callback(result);
   });
 }
@@ -107,8 +117,11 @@ const dbName = 'pizzeria';
 // Create a new MongoClient
 const client = new MongoClient(url, { useNewUrlParser: true });
 
-const onePizzaTest = {name: 'PINOZETANT', price: '9.00€', ingredient: ['tomate', 'jambon', 'ananas', ' fromages râpés'], icon: 'pizza'};
-console.log(onePizzaTest);
+const onePizzaTest = {name: 'PINOZETANT', price: '9.00€', ingredients: ['Tomate', 'jambon', 'ananas', ' fromages râpés'], icon: 'pizza'};
+const twoPizzaTest = [
+  {name: 'MERQUET', price: '9.40€', ingredients: ['Tomate', 'merguez', 'poivrons', 'fromages râpés'], icon: 'pizza'},
+  {name: 'ROME', price: '9.40€', ingredients: ['Tomate', 'chorizo', 'poivrons', 'fromages râpés'], icon: 'pizza'}
+];
 
 // Use connect method to connect to the Server
 client.connect(function(err) {
@@ -117,17 +130,17 @@ client.connect(function(err) {
 
   const db = client.db(dbName);
 
-  insertDocuments(db, function() {
-    findDocuments(db, function() {
-      updateDocument(db, function() {
-        indexCollection(db, function() {
-          removeDocument(db, function() {
-            removeAllDocuments(db, function() {
+  insertOnePizza(db, onePizzaTest, function() {
+    //findDocuments(db, function() {
+      //updateDocument(db, function() {
+        //indexCollection(db, function() {
+          //removeDocument(db, function() {
+            //removeAllPizzas(db, function() {
               client.close();
-            });
-          });
-        });
-      });
-    });
-  }, "test1", "test2");
+            //});
+          //});
+        //});
+      //});
+    //});
+  });
 });
