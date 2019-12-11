@@ -19,7 +19,7 @@ export class ListPage implements OnInit {
     'bluetooth',
     'build'
   ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
+  public items: Array<{ title: string; note: string; id: string; icon: string }> = [];
   constructor() {
     for (let i = 1; i < 11; i++) {
       this.items.push({
@@ -40,7 +40,7 @@ export class ListPage implements OnInit {
   function_Check()
   {
     
-      documents.getElementById("togListItem2").checked = true;
+     // documents.getElementById("togListItem2").checked = true;
 
   }
 
