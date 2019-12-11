@@ -3,7 +3,7 @@ const insertPizza = function(db, pizza, callback) {
   const collection = db.collection('pizzas');
   if (pizza.hasOwnProperty("name") && pizza["name"] !== "" && pizza.hasOwnProperty("price") && pizza["price"] !== "" && pizza.hasOwnProperty("icon") && pizza["icon"] !== "" && pizza.hasOwnProperty("ingredients") && pizza["ingredients"] !== []) {
     // Insert a pizza
-    collection.insertOne({name: pizza.name, price: pizza.price, ingredients: pizza.ingredients, icon: pizza.icon}, function(err, result) {
+    collection.insertOne({name: pizza.name.toUpperCase(), price: pizza.price, ingredients: pizza.ingredients, icon: pizza.icon}, function(err, result) {
       assert.equal(err, null);
       assert.equal(1, result.ops.length);
       callback(result);
@@ -13,37 +13,50 @@ const insertPizza = function(db, pizza, callback) {
     console.log("There was an error when inserting this pizza :");
     console.log(pizza);
     console.log("Please check your entry.");
-    callback("Error");
+    callback();
   }
 }
 
 const insertOnePizza = function(db, pizza, callback) {
   insertPizza(db, pizza, function(result) {
-    if (result == null) {
-      console.log("Inserted 1 pizza into the collection");
+    if(typeof result != "undefined") {
+      if (result["result"]["ok"] == 1) {
+        console.log("Inserted 1 pizza into the collection");
+      }
+    }
+    else {
+      console.log("There was an error when inserting this pizza :");
+      console.log(pizza);
+      console.log("Please check your entry.");
     }
     callback();
   });
 }
 
 const insertManyPizzas = function(db, pizzaArray, callback) {
-  // Get the pizzas collection
-  const collection = db.collection('pizzas');
-  console.log(arguments);
-  // Insert some pizzas
-  var arrayPizz = [];
-  for (i = 0; i < pizza.length; i++){
-
+  var errors = tryInsert = 0;
+  var pizza;
+  for (i = 0; i < pizzaArray.length; i++) {
+    pizza = pizzaArray[i];
+    insertPizza(db, pizza, function(result) {
+      tryInsert += 1;
+      if(typeof result != "undefined") {
+        if (result["result"]["ok"] != 1) {
+          errors += 1;
+        }
+      }
+      else{
+        errors += 1;
+        console.log("There was an error when inserting this pizza :");
+        console.log(pizzaArray[tryInsert - 1]);
+        console.log("Please check your entry.");
+      }
+      if (tryInsert == pizzaArray.length) {
+        console.log("Inserted " + (tryInsert - errors) + " pizzas into the collection with " + errors + " errors.");
+      }
+    });
   }
-  collection.insertMany([
-
-  ], function(err, result) {
-    assert.equal(err, null);
-    assert.equal(3, result.result.n);
-    assert.equal(3, result.ops.length);
-    console.log("Inserted 3 documents into the collection");
-    callback(result);
-  });
+  callback();
 }
 
 const findDocuments = function(db, callback) {
@@ -117,10 +130,10 @@ const dbName = 'pizzeria';
 // Create a new MongoClient
 const client = new MongoClient(url, { useNewUrlParser: true });
 
-const onePizzaTest = {name: 'PINOZETANT', price: '9.00€', ingredients: ['Tomate', 'jambon', 'ananas', ' fromages râpés'], icon: 'pizza'};
+const onePizzaTest = {name: 'PINOZETANT', price: '9.00€', ingredients: ['tomate', 'jambon', 'ananas', 'fromages râpés'], icon: 'pizza'};
 const twoPizzaTest = [
-  {name: 'MERQUET', price: '9.40€', ingredients: ['Tomate', 'merguez', 'poivrons', 'fromages râpés'], icon: 'pizza'},
-  {name: 'ROME', price: '9.40€', ingredients: ['Tomate', 'chorizo', 'poivrons', 'fromages râpés'], icon: 'pizza'}
+  {name: 'MERQUET', price: '9.40€', ingredients: ['tomate', 'merguez', 'poivrons', 'fromages râpés'], icon: 'pizza'},
+  {name: 'ROME', price: '9.40€', ingredients: ['tomate', 'chorizo', 'poivrons', 'fromages râpés'], icon: 'pizza'}
 ];
 
 // Use connect method to connect to the Server
@@ -129,18 +142,21 @@ client.connect(function(err) {
   console.log("Connected successfully to server");
 
   const db = client.db(dbName);
-
-  insertOnePizza(db, onePizzaTest, function() {
-    //findDocuments(db, function() {
-      //updateDocument(db, function() {
-        //indexCollection(db, function() {
-          //removeDocument(db, function() {
-            //removeAllPizzas(db, function() {
-              client.close();
+  removeAllPizzas(db, function() {
+    insertOnePizza(db, onePizzaTest, function() {
+      insertManyPizzas(db, twoPizzaTest, function() {
+        //findDocuments(db, function() {
+          //updateDocument(db, function() {
+            //indexCollection(db, function() {
+              //removeDocument(db, function() {
+                //removeAllPizzas(db, function() {
+                  client.close();
+                //});
+              //});
             //});
           //});
         //});
-      //});
-    //});
+      });
+    });
   });
 });
