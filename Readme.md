@@ -4,9 +4,11 @@
 
 ## Pizzeria :
 
+*Italics show that a part is done*
+
 ### Static part with the menu card
-* Write the list directly in the html code (done)
-* Put the ingredients in a collapsable part (\*)
+* *Write the list directly in the html code*
+* *Put the ingredients in a collapsable part*
 * Use a database to make the list (\*\*)
 
 ### Dynamic part with the daily menu

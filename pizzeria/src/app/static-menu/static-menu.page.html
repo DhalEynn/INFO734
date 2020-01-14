@@ -22,9 +22,9 @@
     <p>Base crème :</p>
     <ion-item *ngFor="let pizza of baseCreme">
       <ion-icon [name]="pizza.icon" slot="start"></ion-icon>
-      {{pizza.title}}
+      {{pizza.name}}
       <div class="pizza-price" slot="end">
-        {{pizza.note}}
+        Price : {{pizza.price}}
       </div>
     </ion-item>
   </ion-list>
