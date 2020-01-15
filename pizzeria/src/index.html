@@ -19,6 +19,27 @@
 </head>
 
 <body>
+  <script>
+    function ingredientFunction() {
+      var button = document.getElementById("showIngredients")
+      if (button.style.backgroundColor === "red") {
+        button.style.backgroundColor = "green";
+      }
+      else {
+        button.style.backgroundColor = "red";
+      }
+      var arrayList = document.getElementsByClassName("divIngredient");
+      for (var i in arrayList) {
+        var x = arrayList[i]
+        if (x.style.display === "block") {
+          x.style.display = "none";
+        }
+        else {
+          x.style.display = "block";
+        }
+      }
+    }
+  </script>
   <app-root></app-root>
 </body>
 

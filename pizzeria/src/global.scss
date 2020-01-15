@@ -24,3 +24,28 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+#showIngredients {
+  &:hover {
+    cursor: pointer;
+    cursor: hand;
+  }
+  width: auto;
+  height: auto;
+  background-color: green;
+  color: white;
+  text-align:center;
+  line-height:50px;
+  border-radius: 30px;
+}
+
+.divIngredient {
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: 10%;
+  text-align: center;
+  border-radius: 30px;
+  background-color: lightblue;
+  display: none;
+}
