@@ -22,6 +22,11 @@ export class AppComponent {
       icon: 'list'
     },
     {
+      title: 'Add pizza',
+      url: '/add-pizza',
+      icon: 'add-circle'
+    },
+    {
       title: 'Menu',
       url: '/static-menu',
       icon: 'pizza'

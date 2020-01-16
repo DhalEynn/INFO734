@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'static-menu',
     loadChildren: './static-menu/static-menu.module#StaticMenuPageModule'
+  },
+  {
+    path: 'add-pizza',
+    loadChildren: './add-pizza/add-pizza.module#AddPizzaPageModule' 
   }
 
 ];
