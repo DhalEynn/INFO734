@@ -21,11 +21,11 @@ export class AppComponent {
       url: '/list',
       icon: 'list'
     },
-    {
+    /*{
       title: 'Add pizza',
       url: '/add-pizza',
       icon: 'add-circle'
-    },
+    },*/
     {
       title: 'Menu',
       url: '/static-menu',

@@ -14,10 +14,6 @@ export class StaticMenuPage implements OnInit {
 
   pizzas : any;
   api : RestService;
-  private selectedItem: any;
-  private pizzaTomate: any;
-  private pizzaCreme: any;
-  private ingred: any;
   public baseTomate: Array<{ name: string; price: string; ingredients: Array<string>; icon: string }> = [];
   public baseCreme: Array<{ name: string; price: string; ingredients: Array<string>; icon: string }> = [];
   public baseAutre: Array<{ name: string; price: string; ingredients: Array<string>; icon: string }> = [];
@@ -28,35 +24,6 @@ export class StaticMenuPage implements OnInit {
     public navController : NavController
   ) {
     this.api = restapi;
-    /*this.pizzaTomate = [
-      ['PINOZETANT', '9.00€'],
-      ['MERQUET', '9.40€'],
-      ['ROME', '9.40€'],
-      ['PATELLIÈRE', '9.60€'],
-      ['CHANTABEAU', '9.60€']
-    ];
-    this.pizzaCreme = [
-      ['CACTUS', '10.90€'],
-      ['NÈVE', '10.60€'],
-      ['VERCHÈRE', '10.60€']
-    ];
-    this.ingred = ["Tomate", "Fromage", "Creme", "Oeuf", "Patate", "Cactus"];
-    for (let i = 0; i < this.pizzaTomate.length; i++) {
-      this.baseTomate.push({
-        name: this.pizzaTomate[i][0],
-        price: this.pizzaTomate[i][1],
-        ingredients: this.ingred, //ing
-        icon: 'pizza'
-      });
-    }
-    for (let i = 0; i < this.pizzaCreme.length; i++) {
-      this.baseCreme.push({
-        name: this.pizzaCreme[i][0],
-        price: this.pizzaCreme[i][1],
-        ingredients: this.ingred,
-        icon: 'pizza'
-      });
-    }*/
   }
 
   async getAllPizzas() {
