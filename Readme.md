@@ -16,13 +16,13 @@
 
 * *Put the menu on a database*
 * **Be able to enter the daily menu : Only work when manually changing the menu in "pizzeria > src > app > list > list.page.ts >> this.getOnePizza("_PIZZANAME_")" (line 53)**
-* **Change automatically the daily menu as the database change (\*\*)**
+* **Change automatically the daily menu as the database change : partially feasible following the above procedure**
 
 ## For bonus :
 
-* **Being able to order (\*)**
-* **The pizzeria is informed that someone ordered (\*\*)**
-* **Being able to pay for it (\*\*\*)**
+* ~~Being able to order (\*)~~
+* ~~The pizzeria is informed that someone ordered (\*\*)~~
+* ~~Being able to pay for it (\*\*\*)~~
 
 # To use the application :
 
