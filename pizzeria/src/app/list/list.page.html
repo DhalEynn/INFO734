@@ -4,34 +4,29 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      List
+      Menu du jour :
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card class="welcome-card">
+    <img src="/assets/pizza.jpg" alt="" />
+    <ion-card-header>
+      <ion-card-title>Pizza du jour</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 
   <ion-list>
-    <ion-item *ngFor="let item of items">
-      <input id={{item.id}} type="checkbox">
-      <label for={{item.id}}>
-        <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-     </label>
-  <div class="list">
-    <ul>
-      <li>{{item.id}}</li>
-      <li>Item 2</li>
-      <li>Item 3</li>
-    </ul>
-  </div>
+    <ion-item *ngFor="let pizza of dailyPizza">
+      <ion-icon [name]="pizza.icon" slot="start"></ion-icon>
+      {{pizza.name}}
+      <div class="pizza-price" slot="end">
+        Price : {{pizza.price}}
+      </div>
+      <div class="dailyIngredient">
+        {{ pizza.ingredients }}
+      </div>
     </ion-item>
   </ion-list>
 </ion-content>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
-  
-

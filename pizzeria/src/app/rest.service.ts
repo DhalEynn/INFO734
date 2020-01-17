@@ -45,9 +45,9 @@ export class RestService {
 
   }
 
-  getTodo(id:any): Observable<any> {
+  getOnePizza(name:any): Observable<any> {
 
-    const apiUrl = "http://localhost:8080/api/pizzas/" + id;
+    const apiUrl = "http://localhost:8080/api/pizza/" + name;
 
     return this.http.get(apiUrl, httpOptions).pipe(
       map(this.extractData),

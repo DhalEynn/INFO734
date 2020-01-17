@@ -34,12 +34,10 @@ export class StaticMenuPage implements OnInit {
     await loading.present();
     await this.api.getAllPizzas()
       .subscribe(res => {
-        console.log(res);
         this.pizzas = res;
 
         for (var key in this.pizzas) {
           var onePizza = this.pizzas[key];
-          console.log(onePizza);
           if (onePizza["ingredients"][0].toLowerCase() == "tomate" || onePizza["ingredients"][0].toLowerCase() == "tomates") {
             this.baseTomate.push({
               name: onePizza["name"],
@@ -48,7 +46,7 @@ export class StaticMenuPage implements OnInit {
               icon: onePizza["icon"]
             });
           }
-          else if (onePizza["ingredients"][0].toLowerCase() == "creme") {
+          else if (onePizza["ingredients"][0].toLowerCase() == "creme" || onePizza["ingredients"][0].toLowerCase() == "crème") {
             this.baseCreme.push({
               name: onePizza["name"],
               price: onePizza["price"],

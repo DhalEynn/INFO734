@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');    // pull information from HTML POST (
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 var cors = require('cors');
 
+var $ = jQuery = require('jquery');
+require('jquery-csv');
+
 // Configuration
 mongoose.connect('mongodb://localhost:27017/pizzeria');
 
@@ -26,6 +29,48 @@ app.use(function(req, res, next) {
 
 // Models
 const ModelPizzas = require('./models');
+
+// To open the csv file ListPizzas
+var fs = require('fs');
+
+var file = '../ListPizzas.csv';
+var listPizzas; // The list of pizzas
+var options = {"separator" : ";"}; // Separator of the csv file
+fs.readFile(file, 'UTF-8', function(err, csv) {
+  listPizzas = $.csv.toObjects(csv, options); // Get the pizzas in the csv file
+
+  // Adding (updating for already existing pizzas) all the pizzas in the file to the database
+  for (var objects in listPizzas) {
+    var onePizza = listPizzas[objects];
+    console.log("------------------------");
+    console.log(onePizza);
+    var name = onePizza["name"].toUpperCase(),
+        price = onePizza["price"],
+        ingredients = onePizza["ingredients"].split(','),
+        icon = "pizza";
+
+    for (var key in ingredients) {
+      ingredients[key] = ingredients[key].trim();
+    }
+
+    ModelPizzas.findOneAndUpdate(
+      {
+        name : name
+      },
+      {
+        name : name,
+        price : price,
+        ingredients: ingredients,
+        icon: icon
+      },
+      {
+        upsert : true
+      }, function(err, pizzas) {
+        if (err)
+          res.send(err);
+    });
+  }
+});
 
 // Routes
 
@@ -72,6 +117,10 @@ const ModelPizzas = require('./models');
           price = req.body.price,
           ingredients = req.body.ingredients.split(','),
           icon = "pizza";
+
+      for (var key in ingredients) {
+        ingredients[key] = ingredients[key].trim();
+      }
 
       ModelPizzas.findOneAndUpdate(
 				{

@@ -4,15 +4,19 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      The Card :
+      Le menu :
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card class="welcome-card">
+    <img src="/assets/pizza.jpg" alt="" />
+  </ion-card>
+
   <button id="showIngredients" onclick="ingredientFunction()">Ingredients</button>
   <ion-list>
-    <p>Base tomate :</p>
+    <p class="bases">Base tomate :</p>
     <ion-item *ngFor="let pizza of baseTomate">
       <ion-icon [name]="pizza.icon" slot="start"></ion-icon>
       {{pizza.name}}
@@ -23,7 +27,7 @@
         {{ pizza.ingredients }}
       </div>
     </ion-item>
-    <p>Base crème :</p>
+    <p class="bases">Base crème :</p>
     <ion-item *ngFor="let pizza of baseCreme">
       <ion-icon [name]="pizza.icon" slot="start"></ion-icon>
       {{pizza.name}}
@@ -34,7 +38,7 @@
         {{pizza.ingredients}}
       </div>
     </ion-item>
-    <p>Autre base :</p>
+    <p class="bases">Autre base :</p>
     <ion-item *ngFor="let pizza of baseAutre">
       <ion-icon [name]="pizza.icon" slot="start"></ion-icon>
       {{pizza.name}}

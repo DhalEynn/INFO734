@@ -26,26 +26,7 @@ export class HomePage {
     this.api = restapi;
   }
 
-  async getAllPizzas() {
-    const loading = await this.loadingController.create({
-      message: 'Loading'
-    });
-
-    await loading.present();
-    await this.api.getAllPizzas()
-      .subscribe(res => {
-        console.log(res);
-        this.pizzas = res;
-        loading.dismiss();
-      }, err => {
-        console.log(err);
-        loading.dismiss();
-      });
-
-  }
-
   ngOnInit() {
-    this.getAllPizzas();
   }
 
 }

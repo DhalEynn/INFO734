@@ -15,7 +15,7 @@
 ### Dynamic part with the daily menu
 
 * *Put the menu on a database*
-* **Be able to enter the daily menu : Only work with Postman requests**
+* **Be able to enter the daily menu : Only work when manually changing the menu in "pizzeria > src > app > list > list.page.ts >> this.getOnePizza("_PIZZANAME_")" (line 53)**
 * **Change automatically the daily menu as the database change (\*\*)**
 
 ## For bonus :

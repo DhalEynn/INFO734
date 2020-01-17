@@ -17,7 +17,7 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
+      title: 'Menu du jour',
       url: '/list',
       icon: 'list'
     },

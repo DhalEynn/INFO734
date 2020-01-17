@@ -1,47 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LoadingController, NavController } from '@ionic/angular';
+import { RestService } from '../rest.service';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+
 @Component({
   selector: 'app-list',
   templateUrl: 'list.page.html',
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
-  private selectedItem: any;
-  private icons = [
-    'flask',
-    'wifi',
-    'beer',
-    'football',
-    'basketball',
-    'paper-plane',
-    'american-football',
-    'boat',
-    'bluetooth',
-    'build'
-  ];
-  public items: Array<{ title: string; note: string; id: string; icon: string }> = [];
-  constructor() {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        id: "togList"+ 'Item' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+
+  pizzas : any;
+  api : RestService;
+  public dailyPizza: Array<{ name: string; price: string; ingredients: Array<string>; icon: string }> = [];
+
+  constructor(
+    public restapi: RestService,
+    public loadingController: LoadingController,
+    public navController : NavController
+  ) {
+    this.api = restapi;
+  }
+
+  async getOnePizza(name:any) {
+    const loading = await this.loadingController.create({
+      message: 'Loading'
+    });
+
+    await loading.present();
+    await this.api.getOnePizza(name)
+      .subscribe(res => {
+        this.pizzas = res;
+
+        this.dailyPizza.push({
+          name: this.pizzas[0]["name"],
+          price: this.pizzas[0]["price"],
+          ingredients: this.pizzas[0]["ingredients"],
+          icon: this.pizzas[0]["icon"]
+        });
+
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        loading.dismiss();
       });
-    }
+
   }
 
   ngOnInit() {
-  }
-  // add back when alpha.4 is out
-  // navigate(item) {
-  //   this.router.navigate(['/list', JSON.stringify(item)]);
-  // }
-  function_Check()
-  {
-    
-     // documents.getElementById("togListItem2").checked = true;
-
+    this.getOnePizza("ROME"); // Make our choice of daily pizza here
   }
 
 }
