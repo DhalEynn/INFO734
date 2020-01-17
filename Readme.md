@@ -29,8 +29,12 @@
 * Install the folder on your computer (download the archive or git clone it)
 * Install MongoDB, Ionic and NPM
 * Open 4 command prompts (for each command, please wait until the text stop defiling before typing the command in the next command prompt) :
+  * First, create the path "*Your PATH*\INFO734 - git\data\db"
   * Command prompt 1 - Write ```"*YOUR_PATH*\MongoDB\bin\mongod.exe" --dbpath="*Your PATH*\INFO734 - git\data\db"```
   * Command prompt 2 - Write ```"YOUR_PATH\MongoDB\bin\mongo.exe"```
+  * Now, in the mongo shell (Command prompt 2), write
+    * ```use pizzeria```
+    * ```db.createCollection("pizzas")```
   * Command prompt 3 - Write
     * ```cd server```
     * ```node server.js```
