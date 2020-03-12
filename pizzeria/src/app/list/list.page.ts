@@ -14,6 +14,7 @@ export class ListPage implements OnInit {
 
   pizzas : any;
   api : RestService;
+  date: Date = new Date();
   public dailyPizza: Array<{ name: string; price: string; ingredients: Array<string>; icon: string }> = [];
 
   constructor(
@@ -23,6 +24,10 @@ export class ListPage implements OnInit {
   ) {
     this.api = restapi;
   }
+
+  /*Array.prototype.sample = function(){
+    return this[Math.floor(Math.random()*this.length)];
+  }*/
 
   async getOnePizza(name:any) {
     const loading = await this.loadingController.create({
@@ -46,11 +51,38 @@ export class ListPage implements OnInit {
         console.log(err);
         loading.dismiss();
       });
+  }
 
+  async pizzaPerDays() {
+    const loading = await this.loadingController.create({
+      message: 'Loading'
+    });
+
+    await loading.present();
+    await this.api.getAllPizzas()
+      .subscribe(res => {
+        this.pizzas = res;
+
+        // Value used to get the daily menu (one pizza depending on the date)
+        let value = this.date.getDate() % this.pizzas.length;
+
+        this.dailyPizza.push({
+          name: this.pizzas[value]["name"],
+          price: this.pizzas[value]["price"],
+          ingredients: this.pizzas[value]["ingredients"],
+          icon: this.pizzas[value]["icon"]
+        });
+
+        loading.dismiss();
+      }, err => {
+        console.log(err);
+        loading.dismiss();
+      });
   }
 
   ngOnInit() {
-    this.getOnePizza("ROME"); // Make our choice of daily pizza here
+    //this.getOnePizza("ROME"); // Make our choice of daily pizza here
+    this.pizzaPerDays();
   }
 
 }
